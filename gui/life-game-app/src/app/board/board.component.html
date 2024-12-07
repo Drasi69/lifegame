@@ -1,0 +1,6 @@
+<div class="board">
+    <div *ngFor="let row of world; index as y" class="board-row">
+      <app-square *ngFor="let col of row; index as x" [val]="col" [row]="y" [col]="x" (point)="click($event)" />
+    </div>
+  </div>
+  
