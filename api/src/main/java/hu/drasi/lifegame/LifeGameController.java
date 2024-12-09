@@ -25,6 +25,8 @@ import org.springframework.web.cors.CorsConfiguration;
 public class LifeGameController {
   @Autowired
   private ControlPanelService controlPanelService;
+  @Autowired
+  private GameService gameService;
   
   protected LifeGameController() {
     
@@ -33,6 +35,10 @@ public class LifeGameController {
   @GetMapping("/board/new")
   ResponseEntity<String[][]> newBoard(int rows, int cols) {
     String[][] board = new String[rows][cols];
+    board[0][1] = "X";
+    board[0][2] = "X";
+    board[1][1] = "X";
+    board[1][4] = "X";
     return ResponseEntity.ok(board);
   }
   
@@ -61,5 +67,10 @@ public class LifeGameController {
         newBoard[r][c] = oldBoard[r][c];
       }
     }
+  }
+  
+  @PostMapping("/play")
+  ResponseEntity<String[][]> play(@RequestBody BoardDto board) {
+    return ResponseEntity.ok(gameService.play(board.getBoard()));
   }
 }

@@ -53,4 +53,15 @@ export class LifeGameService {
     });
     return (await data.json()) ?? [];
   }
+
+  async play(board: BoardModel) {
+    const service: string = '/play';
+
+    const data = await fetch(`${this.url}${service}`, {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(board),
+    });
+    return (await data.json()) ?? [];
+  }
 }
