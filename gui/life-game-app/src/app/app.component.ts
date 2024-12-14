@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TopBarComponent } from "./top-bar/top-bar.component";
-import { BoardComponent } from "./board/board.component";
-import { ControlPanelComponent } from "./control-panel/control-panel.component";
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { BoardComponent } from './board/board.component';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [TopBarComponent, BoardComponent, ControlPanelComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'life-game-app';
@@ -19,6 +19,7 @@ export class AppComponent {
   status = '';
   round = 0;
   isResize = false;
+  newGame = false;
 
   setIsRunning(value: boolean) {
     this.isRunning = value;
@@ -42,5 +43,9 @@ export class AppComponent {
 
   setIsResize(value: boolean) {
     this.isResize = value;
+  }
+
+  setNewGame(value: boolean) {
+    this.newGame = value;
   }
 }

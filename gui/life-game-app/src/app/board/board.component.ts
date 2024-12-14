@@ -17,6 +17,7 @@ export class BoardComponent {
   @Input() rows = 6;
   @Input() isRunning = false;
   @Input() isResize = false;
+  @Input() newGame = false;
   @Output() status = new EventEmitter<string>();
   @Output() round = new EventEmitter<number>();
   @Output() resizeOff = new EventEmitter<boolean>();
@@ -39,6 +40,14 @@ export class BoardComponent {
             this.world = data;
           })
           .catch((error) => console.error(error));
+      }
+      if (this.newGame) {
+        this.newGame = false;
+        this.service.newBoard(this.rows, this.cols).then((data: string[][]) => {
+          this.world = data;
+          this.roundNo = 0;
+          this.round.emit(0);
+        });
       }
       if (this.isRunning) {
         this.status.emit('Running');

@@ -41,6 +41,17 @@ public class GameService {
   private int getNeighbours(int row, int col, String[][] board, ControlPanel cp) {
     int num = 0;
 
+    if (cp.isInfinite()) {
+      num = getInfiniteNeighbours(row, col, board, cp);
+    } else {
+      num = getNormalNeighbours(row, col, board, cp);
+    }
+    return num;
+  }
+  
+  private int getNormalNeighbours(int row, int col, String[][] board, ControlPanel cp) {
+    int num = 0;
+    
     if (row > 0) {
       if (col > 0 && "X".equals(board[row - 1][col - 1])) {
         num++;
@@ -65,7 +76,41 @@ public class GameService {
         num++;
       }
     }
-
+    
+    return num;
+  }
+  
+  private int getInfiniteNeighbours(int row, int col, String[][] board, ControlPanel cp) {
+    int num = 0;
+    
+    int beforeRow = row == 0 ? cp.getRows() - 1 : row - 1;
+    int afterRow = row == cp.getRows() - 1 ? 0 : row + 1;
+    int beforeCol = col == 0 ? cp.getCols() - 1 : col - 1;
+    int afterCol = col == cp.getCols() - 1 ? 0 : col + 1;
+    
+    if ("X".equals(board[beforeRow][beforeCol])) {
+      num++;
+    }
+    if ("X".equals(board[beforeRow][col])) num++;
+    if ("X".equals(board[beforeRow][afterCol])) {
+      num++;
+    }
+    
+    if ("X".equals(board[row][beforeCol])) {
+      num++;
+    }
+    if ("X".equals(board[row][afterCol])) {
+      num++;
+    }
+    
+    if ("X".equals(board[afterRow][beforeCol])) {
+      num++;
+    }
+    if ("X".equals(board[afterRow][col])) num++;
+    if ("X".equals(board[afterRow][afterCol])) {
+      num++;
+    }
+    
     return num;
   }
 }

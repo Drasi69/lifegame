@@ -1,7 +1,19 @@
-<app-top-bar (run)="setIsRunning($event)"></app-top-bar>
+<app-top-bar (run)="setIsRunning($event)" (newGame)="setNewGame($event)"></app-top-bar>
 <div class="game">
-  <app-board [isRunning]="isRunning" [cols]="columns" [rows]="rows" [isResize]="isResize"
-  (round)="setRound($event)" (status)="setStatus($event)"></app-board>
-  <app-control-panel [status]="status" [round]="round"
-  (columns)="setColumns($event)" (rows)="setRows($event)" (isResize)="setIsResize($event)"></app-control-panel>
+  <app-board
+    [isRunning]="isRunning"
+    [cols]="columns"
+    [rows]="rows"
+    [isResize]="isResize"
+    [newGame]="newGame"
+    (round)="setRound($event)"
+    (status)="setStatus($event)"
+  ></app-board>
+  <app-control-panel
+    [status]="status"
+    [round]="round"
+    (columns)="setColumns($event)"
+    (rows)="setRows($event)"
+    (isResize)="setIsResize($event)"
+  ></app-control-panel>
 </div>
